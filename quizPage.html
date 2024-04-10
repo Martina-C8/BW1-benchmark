@@ -10,6 +10,7 @@
     <header>
         <div class="container">
             <img id="logo" src="/assets/epicode_logo.png" alt="epicode_logo">
+            <p id="timer"></p>
         </div>
     </header>
 
@@ -20,21 +21,21 @@
   
     <div class="centeredContainer">
         <div class="upperButtons">
-            <div class="row">
-                <button class="responseButton">Prima Risposta</butto>
+            <!-- <div class="row">
+                <button class="responseButton" value="Prima Risposta" onclick="validateAnswer('Prima Risposta')">Prima Risposta</butto>
                 <button class="responseButton">Seconda Risposta</button>
             </div>
             <div class="row">
                 <button class="responseButton">Terza Risposta</button>
                 <button class="responseButton">Quarta Risposta</button>
-            </div>
+            </div> -->
         </div>
     </div>
     
     <div class="whatQuestion">
-        <p>QUESTION 1<span class="numbers">/10</span></p>
+        <p>QUESTION <span id="currentQuestion"></span>/<span id="maxQuestion"></span></p>
     </div>
 </main>
-<script src="script.js"></script>
+<script defer src="script.js"></script>
 </body>
 </html>

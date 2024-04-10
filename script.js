@@ -111,20 +111,26 @@ const questions = [
 //   ],
 // }
 
+//setInterval e clearInterval per il js (necessaria funzione che decrementa il timermax fino a 0 e poi lo resetta)
+
 // contatore per le domande, verrà usato per sapere a che domanda siamo e per andare a cercare nell'array delle questions
-let questionCounter = 0
+let questionCounter = 9
 // contatore per sapere quante domande ci sono nell'array
 let numberOfQuestions = questions.length
 // variabile che contiene la domanda attualmente gestita
-let currentQuestion = questions[0]
+let currentQuestion = questions[questionCounter]
 // contatori per le risposte
-let numberOfCorrectAnswers = 0
-let numberOfWrongAnswers = 0
-let numberOfSkippedAnswers = 0
+let numberOfCorrectAnswers = 5
+let numberOfWrongAnswers = 4
+let numberOfSkippedAnswers = 1
+// tempo massimo per rispondere alle domande
+let maxTime = 30
+
 
 // funzione per passare alla domanda successiva
 function getNextQuestion(){
   questionCounter += 1
+  currentQuestion = questions[questionCounter]
 }
 
 // funzione per creare l'array che contiene tutte le risposte
@@ -146,8 +152,14 @@ function randomizeArray(arr){
 
 // funzione per validare la risposta (deve essere utilizzata come onClikc dei pulsanti) e per incrementare i contatori
 function validateAnswer(response){
+  // se la risposta è giusta, allora correctAnswer = true, altrimenti è false
   let correctAnswer = response === currentQuestion.correct_answer ? true : false
+  // se true (ripsposta giusta) allora aumento il contatore delle risposte giuste, altrimenti quello delle risposte sbagliate
   correctAnswer ? numberOfCorrectAnswers += 1 : numberOfWrongAnswers += 1
+  // se siamo all'ultima domanda vado alla result page, altrimenti alla domanda successiva
+  questionCounter === numberOfQuestions -1 ? goToResultsPage() : getNextQuestion()
+  aggiornaQuiz(currentQuestion)
+  
 }
 
 // funzione da richiamare quando il timer va a 0 e non è stata data una risposta
@@ -155,17 +167,86 @@ function skippedAnswer(){
   numberOfSkippedAnswers += 1
 }
 
-// funzione per raggiungere la pagina dei punteggi (necessario portarsi dietro i contatori!)
+// funzione per raggiungere la pagina dei punteggi (necessario portarsi dietro i contatori con il local storage e pulire!)
 function goToResultsPage(){
+  localStorage.setItem("numberOfCorrectAnswers", numberOfCorrectAnswers)
+  localStorage.setItem("numberOfWrongAnswers", numberOfWrongAnswers)
+  localStorage.setItem("numberOfSkippedAnswers", numberOfSkippedAnswers)
   location.replace("resultPage.html")
 }
 
 // funzione per aggiornare gli elementi del quiz (domanda, buttons e contatore domanda attuale), a partire da una domanda
 function aggiornaQuiz(question){
+  // recupero i vari container per la domanda, i pulsanti e le il numero di domanda\tot domanda
   let questionContainer = document.getElementsByClassName("question")[0]
   let buttonsContainer = document.getElementsByClassName("upperButtons")[0]
+  // pulisco il contenuto del contenitore dei pulsanti, se no ad ogni click se ne creerebbero di nuovi
+  buttonsContainer.innerHTML = ''
+  let currentQuestionContainer = document.getElementById("currentQuestion")
+  let maxQuestionContainer = document.getElementById("maxQuestion")
+
+  // aggiorno nr di domanda e tot domande
+  currentQuestionContainer.innerText = questionCounter + 1
+  maxQuestionContainer.innerText = numberOfQuestions
+
+  // creo l'array con le risposte
+  let answersArray = aggregateAnswers(question)
   
+  // lo randomizzo
+  answersArray = randomizeArray(answersArray)
+
+  // aggiorno il testo della domanda 
+  questionContainer.innerHTML = question.question
+  
+  // creo i button e li aggiungo al div che li deve contenere
+  for (let a of answersArray){
+    // creo il button
+    let b = document.createElement("button")
+    // gli modifico i valori di value, innerText e classname
+    b.value = a
+    b.innerText = a
+    b.className = "responseButton"
+    // aggiungo il monitoraggio dell'evento click, passandogli la funzione per validare la risposta
+    b.addEventListener("click", () => {validateAnswer(a)})
+    // aggiungo tutto al div dei pulsanti
+    buttonsContainer.appendChild(b)
+  }
+  // resetto il timer e lo mostro
+  maxTime = 30
+  showTimer()
 }
 
-// tests
 
+// funzione per mostrare il timer
+function showTimer(){
+  // recupero il contenitore in cui mettere il conteggio
+  let timerContainer = document.getElementById("timer")
+  // ci inserisco il valore attuale del timer
+  timerContainer.innerText = maxTime
+}
+
+// funzione per far passare il tempo del timer
+function updateTimer(){
+  // se siamo all'ultima domanda ed andiamo a 0 col timer, +1 per le risposte saltate e vado ai risultati
+  if (maxTime === 0 && questionCounter === numberOfQuestions -1){
+    skippedAnswer()
+    goToResultsPage()
+  }
+  // se arriviamo a 0, ma non è l'ultima domanda, +1 per le risposte saltate e vado alla domanda successiva (e aggiorno la pagina)
+  else if (maxTime === 0 && questionCounter < numberOfQuestions -1) {
+    skippedAnswer()
+    getNextQuestion()
+    aggiornaQuiz(currentQuestion)
+  }
+  // altrimenti, proseguo col countdown
+  else{
+    maxTime -= 1
+    showTimer()
+  }
+}
+
+
+// avvio il quiz con la prima domanda
+aggiornaQuiz(currentQuestion)
+// avvio il timer
+// const t = setInterval(updateTimer, 1000)
