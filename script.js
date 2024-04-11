@@ -114,17 +114,17 @@ const questions = [
 //setInterval e clearInterval per il js (necessaria funzione che decrementa il timermax fino a 0 e poi lo resetta)
 
 // contatore per le domande, verrà usato per sapere a che domanda siamo e per andare a cercare nell'array delle questions
-let questionCounter = 9
+let questionCounter = 0
 // contatore per sapere quante domande ci sono nell'array
 let numberOfQuestions = questions.length
 // variabile che contiene la domanda attualmente gestita
 let currentQuestion = questions[questionCounter]
 // contatori per le risposte
-let numberOfCorrectAnswers = 5
-let numberOfWrongAnswers = 4
-let numberOfSkippedAnswers = 1
+let numberOfCorrectAnswers = 0
+let numberOfWrongAnswers = 0
+let numberOfSkippedAnswers = 0
 // tempo massimo per rispondere alle domande
-let maxTime = 30
+let maxTime = 15
 
 
 // funzione per passare alla domanda successiva
@@ -212,7 +212,7 @@ function aggiornaQuiz(question){
     buttonsContainer.appendChild(b)
   }
   // resetto il timer e lo mostro
-  maxTime = 30
+  maxTime = 15
   showTimer()
 }
 
@@ -249,4 +249,4 @@ function updateTimer(){
 // avvio il quiz con la prima domanda
 aggiornaQuiz(currentQuestion)
 // avvio il timer
-// const t = setInterval(updateTimer, 1000)
+const t = setInterval(updateTimer, 1000)
