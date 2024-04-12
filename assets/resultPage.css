@@ -11,6 +11,12 @@ body, html {
     background-position: center;
 }
 
+#logo {
+    height: 4em;
+    margin-top: 2em;
+    margin-left: 8%;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -19,54 +25,91 @@ body, html {
     height: 100%;
 }
 
+main{
+    font-family: "Inter";
+}
+
 h1 {
-    font-size: 2em;
+    font-size: 60px;
+    font-family: "Outfit";
+    margin-bottom: 0px;
+}
+h2{
+    font-size: 25px;
+    margin-top: 0px;
+    font-weight: normal;
 }
 
 .results-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 80%;
+    width: 100%;
     margin-top: 20px;
 }
 
 .results-container > div {
-    text-align: center;
     flex: 1;
-    margin: 0 10px;
+    padding-left: 150px;
+    line-height: 1.2; 
 }
 
-.correct-answers, .incorrect-answers {
-    background-color: #717171;
-    padding: 20px;
+div.correct-answers > p:nth-child(1), div.incorrect-answers > p:nth-child(1){
+    font-size: 45px;
+    margin-bottom: 0px;
 }
 
-.correct-answers span, .incorrect-answers span {
+div.correct-answers > p:nth-child(2){
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 43px;
     font-weight: bold;
-    font-size: 1.5em;
-    color: #007bff;
+}
+
+div.incorrect-answers > p:nth-child(2){
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 43px;
+    font-weight: bold;
+    padding-left: 8px;
+
+}
+
+div.correct-answers > p:nth-child(3){
+    margin-top: 0px;
+}
+
+div.incorrect-answers > p:nth-child(3){
+    margin-top: 0px;
+    padding-left: 33px;
 }
 
 .chart-container {
-    flex: 2;
     /* Grafico a torta */
-    /* Placeholder per il grafico a torta */
+    flex: 2;
     background-color: #ccc;
-    height: 300px; /* Imposta l'altezza desiderata per il grafico */
+    height: 300px;
 }
 
 .rate-btn {
-    margin-top: 20px;
+    width: 230px;
+    height: 60px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: transparent;
     color: #fff;
-    border: none;
+    border: 2px solid white;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.645);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .rate-btn:hover {
-    background-color: #0056b3;
+    background-color: #1c60a8;
 }
+
+
+  
