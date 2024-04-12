@@ -124,7 +124,10 @@ let numberOfCorrectAnswers = 0
 let numberOfWrongAnswers = 0
 let numberOfSkippedAnswers = 0
 // tempo massimo per rispondere alle domande
-let maxTime = 15
+let startTime = 15
+let timerDegrees = 360
+let initialDgs = 360
+let degPerSecond = timerDegrees / startTime
 
 
 // funzione per passare alla domanda successiva
@@ -177,6 +180,8 @@ function goToResultsPage(){
 
 // funzione per aggiornare gli elementi del quiz (domanda, buttons e contatore domanda attuale), a partire da una domanda
 function aggiornaQuiz(question){
+
+  initialDgs = timerDegrees
   // recupero i vari container per la domanda, i pulsanti e le il numero di domanda\tot domanda
   let questionContainer = document.getElementsByClassName("question")[0]
   let buttonsContainer = document.getElementsByClassName("upperButtons")[0]
@@ -212,18 +217,22 @@ function aggiornaQuiz(question){
     buttonsContainer.appendChild(b)
   }
   // resetto il timer e lo mostro
-  maxTime = 15
-  showTimer()
+  maxTime = startTime
+  showTimer(initialDgs)
 }
 
 
 // funzione per mostrare il timer
-function showTimer(){
-  // recupero il contenitore in cui mettere il conteggio
+function showTimer(reduceDegrees){
+  // recupero il contenitore in cui mettere il conteggio e quello che contiene il cerchio per il timer
   let timerContainer = document.getElementById("timer")
+  let cpContainer = document.getElementById("circularProgress")
   // ci inserisco il valore attuale del timer
   timerContainer.innerText = maxTime
+  // modifico il nr di gradi a cui è arrivato il cerchio
+  cpContainer.style.background = `conic-gradient(#00ffff, ${reduceDegrees}deg, #d20094 0deg)`
 }
+
 
 // funzione per far passare il tempo del timer
 function updateTimer(){
@@ -231,17 +240,20 @@ function updateTimer(){
   if (maxTime === 0 && questionCounter === numberOfQuestions -1){
     skippedAnswer()
     goToResultsPage()
+    clearInterval(t)
   }
   // se arriviamo a 0, ma non è l'ultima domanda, +1 per le risposte saltate e vado alla domanda successiva (e aggiorno la pagina)
   else if (maxTime === 0 && questionCounter < numberOfQuestions -1) {
     skippedAnswer()
     getNextQuestion()
     aggiornaQuiz(currentQuestion)
+    
   }
   // altrimenti, proseguo col countdown
   else{
     maxTime -= 1
-    showTimer()
+    initialDgs -= degPerSecond
+    showTimer(initialDgs)
   }
 }
 
@@ -249,4 +261,4 @@ function updateTimer(){
 // avvio il quiz con la prima domanda
 aggiornaQuiz(currentQuestion)
 // avvio il timer
-//const t = setInterval(updateTimer, 1000)
+const t = setInterval(updateTimer, 1000)
