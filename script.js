@@ -187,7 +187,7 @@ function aggiornaQuiz(question){
 
   // aggiorno nr di domanda e tot domande
   currentQuestionContainer.innerText = questionCounter + 1
-  maxQuestionContainer.innerText = numberOfQuestions
+  maxQuestionContainer.innerText = '/' + numberOfQuestions
 
   // creo l'array con le risposte
   let answersArray = aggregateAnswers(question)
@@ -249,4 +249,4 @@ function updateTimer(){
 // avvio il quiz con la prima domanda
 aggiornaQuiz(currentQuestion)
 // avvio il timer
-const t = setInterval(updateTimer, 1000)
+//const t = setInterval(updateTimer, 1000)

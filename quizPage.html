@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiz Page</title>
     <link rel="stylesheet" href="/assets/quizPage.css">
 </head>
 <body>
+    
+<div id="wrapper">
     <header>
         <div class="container">
             <img id="logo" src="/assets/epicode_logo.png" alt="epicode_logo">
             <p id="timer"></p>
         </div>
     </header>
-
-<main>
-    <p class="question">
-        How can I create a <br><strong>checkbox in HTML?</strong>
-    </p>  
-  
-    <div class="centeredContainer">
-        <div class="upperButtons">
-            <!-- <div class="row">
-                <button class="responseButton" value="Prima Risposta" onclick="validateAnswer('Prima Risposta')">Prima Risposta</butto>
-                <button class="responseButton">Seconda Risposta</button>
+    <main>
+        <p class="question">
+        </p>  
+      
+        <div class="centeredContainer">
+            <div class="upperButtons">
             </div>
-            <div class="row">
-                <button class="responseButton">Terza Risposta</button>
-                <button class="responseButton">Quarta Risposta</button>
-            </div> -->
         </div>
-    </div>
-    
-    <div class="whatQuestion">
-        <p>QUESTION <span id="currentQuestion"></span>/<span id="maxQuestion"></span></p>
-    </div>
-</main>
+        
+        <div class="whatQuestion">
+            <p>QUESTION <span id="currentQuestion"></span><span id="maxQuestion"></span></p>
+        </div>
+    </main>
+</div>
+
 <script defer src="script.js"></script>
 </body>
 </html>
