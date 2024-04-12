@@ -23,3 +23,7 @@ function showResults(){
 // esecuzione della funzione
 getDataFromLocalStorage()
 showResults()
+
+function goToLastPage () {
+    location.replace("lastPage.html")
+}
