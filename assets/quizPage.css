@@ -21,8 +21,40 @@ body, html {
     padding-right: 8em;
 }
 
+.timerContainer{
+    /* border: solid 2px black; */
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30em;
+}
+
+#circularProgress{
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: conic-gradient(#00ffff, 360deg, #d20094 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#circularProgress::before{
+    content: "";
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: #d20094;
+}
+
 #timer {
-    padding-left: 8em;
+    /* padding-left: 8em; */
+    font-family: "inter";
+    font-size: 3.5em;
+    z-index: 2;
 }
 
 header{
@@ -40,6 +72,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 2em;
 }
 .container p{
     /* margin-top: 4em;
