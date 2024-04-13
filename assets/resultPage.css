@@ -83,12 +83,7 @@ div.incorrect-answers > p:nth-child(3){
     padding-left: 33px;
 }
 
-.chart-container {
-    /* Grafico a torta */
-    flex: 2;
-    background-color: #ccc;
-    height: 300px;
-}
+
 
 .rate-btn {
     width: 230px;

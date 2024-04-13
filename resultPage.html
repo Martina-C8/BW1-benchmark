@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Results</title>
     <link rel="stylesheet" href="/assets/resultPage.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
     <header>
@@ -20,9 +22,8 @@
                 <p>66.7%</p>
                 <p>4/6 questions</p>
             </div>
-            <div class="chart-container">
-                <!-- Grafico a torta qui -->
-            </div>
+            <!-- Grafico a torta -->
+                <canvas id="pie-chart"></canvas>            
             <div class="incorrect-answers">
                 <p>Wrong</p>
                 <p>33.3%</p>
@@ -32,5 +33,6 @@
         <button class="rate-btn">RATE US</button>
     </div>
 </main>
+<script src="/resultPageScript.js"></script>
 </body>
 </html>

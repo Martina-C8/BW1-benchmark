@@ -1,25 +1,27 @@
-// contatori per le risposte
-let numberOfCorrectAnswers = 0
-let numberOfWrongAnswers = 0
-let numberOfSkippedAnswers = 0
 
-// funzione per recuperare dal local storage i valori delle risposte
-function getDataFromLocalStorage(){
-    numberOfCorrectAnswers = localStorage.getItem("numberOfCorrectAnswers")
-    numberOfWrongAnswers = localStorage.getItem("numberOfWrongAnswers")
-    numberOfSkippedAnswers = localStorage.getItem("numberOfSkippedAnswers")
+// Ottieni il contesto del canvas
+var ctx = document.getElementById('pie-chart').getContext('2d');
 
-    console.log(`Correct: ${numberOfCorrectAnswers}, Wrong: ${numberOfWrongAnswers}, Skipped: ${numberOfSkippedAnswers}`)
-    // pulizia del local storage dopo aver recuperato i dati
-    localStorage.clear()
-}
+// Dati del grafico a torta
+var data = {
+   
+    datasets: [{
+        data: [4, 2], // Inserisci qui il numero di risposte corrette e sbagliate
+        backgroundColor: ['#00ffff', '#d20094'], // Colori delle fette del grafico
+        borderWidth: 0 // Spessore dei bordi delle fette
+    }]
+};
 
-// funzione per mostrare i dati sul dom
-function showResults(){
-    let scoreContainer = document.getElementById("score")
-    scoreContainer.innerText = `Correct: ${numberOfCorrectAnswers}, Wrong: ${numberOfWrongAnswers}, Skipped: ${numberOfSkippedAnswers}`
-}
+// Opzioni del grafico
+var options = {
+    responsive: false,
+    maintainAspectRatio: false
+};
 
-// esecuzione della funzione
-getDataFromLocalStorage()
-showResults()
+
+// Crea il grafico a torta
+var pieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options
+});
