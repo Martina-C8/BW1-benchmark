@@ -124,11 +124,17 @@ let numberOfCorrectAnswers = 0
 let numberOfWrongAnswers = 0
 let numberOfSkippedAnswers = 0
 // tempo massimo per rispondere alle domande
-let startTime = 15
-let timerDegrees = 360
-let initialDgs = 360
-let degPerSecond = timerDegrees / startTime
-
+const startTime = 5
+// tempo trascorso dall'avvio della domanda
+let passedTime = 0
+// variabile per mostrare il tempo rimanente
+let timeLeft = startTime
+// contenitore del path
+let remainginTimePath = document.getElementById("timeRemaining")
+// lunghezza totale del path
+let remainginTimePathLength = remainginTimePath.getTotalLength().toFixed(0)
+// contenitore in cui mettere il tempo trascorso in secondi
+let timerContainer = document.getElementById("timer")
 
 // funzione per passare alla domanda successiva
 function getNextQuestion(){
@@ -181,7 +187,6 @@ function goToResultsPage(){
 // funzione per aggiornare gli elementi del quiz (domanda, buttons e contatore domanda attuale), a partire da una domanda
 function aggiornaQuiz(question){
 
-  initialDgs = timerDegrees
   // recupero i vari container per la domanda, i pulsanti e le il numero di domanda\tot domanda
   let questionContainer = document.getElementsByClassName("question")[0]
   let buttonsContainer = document.getElementsByClassName("upperButtons")[0]
@@ -217,33 +222,30 @@ function aggiornaQuiz(question){
     buttonsContainer.appendChild(b)
   }
   // resetto il timer e lo mostro
-  maxTime = startTime
-  showTimer(initialDgs)
+  timeLeft = startTime
+  passedTime = 0
+  showTimer()
 }
 
 
 // funzione per mostrare il timer
-function showTimer(reduceDegrees){
-  // recupero il contenitore in cui mettere il conteggio e quello che contiene il cerchio per il timer
-  let timerContainer = document.getElementById("timer")
-  let cpContainer = document.getElementById("circularProgress")
-  // ci inserisco il valore attuale del timer
-  timerContainer.innerText = maxTime
-  // modifico il nr di gradi a cui è arrivato il cerchio
-  cpContainer.style.background = `conic-gradient(#00ffff, ${reduceDegrees}deg, #d20094 0deg)`
+function showTimer(){
+  // inserisco il valore attuale del timer nel suo contenitore
+  timerContainer.innerText = timeLeft
+  remainginTimePath.setAttribute("stroke-dasharray", setPathDashArray())
 }
 
 
 // funzione per far passare il tempo del timer
 function updateTimer(){
   // se siamo all'ultima domanda ed andiamo a 0 col timer, +1 per le risposte saltate e vado ai risultati
-  if (maxTime === 0 && questionCounter === numberOfQuestions -1){
+  if (timeLeft === 0 && questionCounter === numberOfQuestions -1){
     skippedAnswer()
     goToResultsPage()
     clearInterval(t)
   }
   // se arriviamo a 0, ma non è l'ultima domanda, +1 per le risposte saltate e vado alla domanda successiva (e aggiorno la pagina)
-  else if (maxTime === 0 && questionCounter < numberOfQuestions -1) {
+  else if (timeLeft === 0 && questionCounter < numberOfQuestions -1) {
     skippedAnswer()
     getNextQuestion()
     aggiornaQuiz(currentQuestion)
@@ -251,12 +253,26 @@ function updateTimer(){
   }
   // altrimenti, proseguo col countdown
   else{
-    maxTime -= 1
-    initialDgs -= degPerSecond
-    showTimer(initialDgs)
+    passedTime += 1
+    timeLeft = startTime - passedTime
+    showTimer()
   }
 }
 
+// funzione che valorizza il dashArray per il path affinché corrisponda all'elapsed time
+function setPathDashArray(){
+  // percentuale del tempo passato
+  let timePercentage = timeLeft / startTime
+  // questa operazione serve perchè l'animazione, quando il timer arriva a 0, non è al fondo, 
+  // perchè ci mette ancora 1 secondo a finire (mentre il timer è già a zero). 
+  // Allora distribuisco questo secondo su tutti gli altri secondi.
+  timePercentage = timePercentage - (1/startTime) * (1-timePercentage)
+  // calcolo quanto deve essere lungo l'actual path per rappresentare il tempo già trascorso
+  // nel caso in cui vada sotto zero, lo riporto a zero per non far ririempire tutto il dash.
+  let actualDash = (timePercentage * remainginTimePathLength).toFixed(0) < 0 ? 0 : (timePercentage * remainginTimePathLength).toFixed(0)
+  // compongo e restituisco la stringa
+  return sdaString = `${actualDash} ${remainginTimePathLength}`
+}
 
 // avvio il quiz con la prima domanda
 aggiornaQuiz(currentQuestion)

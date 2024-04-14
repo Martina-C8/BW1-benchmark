@@ -13,9 +13,18 @@
         <div class="container">
             <img id="logo" src="/assets/epicode_logo.png" alt="epicode_logo">
             <div class="timerContainer">
-                <div id="circularProgress">
-                    <span id="timer"></span>
-                </div>
+                <svg width="200px" height="200px">
+                    <circle class="base" cx="100" cy="100" r="80" stroke="grey" fill="transparent" stroke-width="10"/>
+                    <path id="timeRemaining"
+                    d="
+                      M 100, 100
+                      m 0, -80
+                      a 40, 40, 0 1,0 0, 160
+                      a 40, 40, 0 1,0 0, -160
+                      "
+                    />
+                </svg>
+                <span id="timer"></span>
             </div>
         </div>
     </header>

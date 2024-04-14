@@ -26,11 +26,19 @@ body, html {
     width: 200px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin-left: 30em;
 }
 
-#circularProgress{
+#timeRemaining{
+    stroke: #00ffff;
+    fill:  transparent;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: 1s linear all;
+}
+/* #circularProgress{
     position: relative;
     height: 100px;
     width: 100px;
@@ -48,10 +56,11 @@ body, html {
     width: 80px;
     border-radius: 50%;
     background-color: #d20094;
-}
+} */
 
 #timer {
     /* padding-left: 8em; */
+    position: absolute;
     font-family: "inter";
     font-size: 3.5em;
     z-index: 2;
