@@ -38,25 +38,11 @@ body, html {
     stroke-linecap: round;
     transition: 1s linear all;
 }
-/* #circularProgress{
-    position: relative;
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    background: conic-gradient(#00ffff, 360deg, #d20094 0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#circularProgress::before{
-    content: "";
-    position: absolute;
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
-    background-color: #d20094;
+/* Provare ad attribuire questa classe quando voglio che ci sia l'animazione, e toglierla quando no */
+/* #timeRemaining .addTransition{
+    transition: 1s linear all;
 } */
+
 
 #timer {
     /* padding-left: 8em; */

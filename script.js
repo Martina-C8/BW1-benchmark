@@ -255,6 +255,7 @@ function updateTimer(){
   else{
     passedTime += 1
     timeLeft = startTime - passedTime
+    
     showTimer()
   }
 }
