@@ -18,7 +18,6 @@ var options = {
     maintainAspectRatio: false
 };
 
-
 // Crea il grafico a torta
 var pieChart = new Chart(ctx, {
     type: 'doughnut',
