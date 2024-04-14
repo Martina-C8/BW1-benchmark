@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Exam Results</title>
     <link rel="stylesheet" href="/assets/resultPage.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <header>
+        <img id="logo" src="/assets/epicode_logo.png" alt="epicode_logo">
+    </header>
+    <main>
+        <div class="container">
+            <h1>Results</h1>
+            <h2>The summary of your answers:</h2>
+            <div class="results-container">
+                <div class="correct-answers">
+                    <p>Correct</p>
+                    <p id="risultatoGiuste">66.7%</p> 
+                    <p>4/6 questions</p>
+                </div>
+                <!-- Grafico a torta -->
+                <canvas id="pie-chart"></canvas>            
+                <div class="incorrect-answers">
+                    <p>Wrong</p>
+                    <p id="risultatoSbagliate">33.3%</p> 
+                    <p>2/6 questions</p>
+                </div>
+            </div>
+            <button onclick="goToLastPage()" class="rate-btn">RATE US</button>
+        </div>
+    </main>
 
-    <h1>Risultati del Quiz</h1>
-    <div>
-        <p id="risultatoGiuste">correctPercentage: </p>
-        <p id="risultatoSbagliate">incorrectPercentage: </p>
-        <p id="risultatoSaltate">skippedPercentage: </p>
-    </div>
-
-    <script src="script.js"></script>
-    
+        
+        </div>
+    </main>
+    <script src="/resultPageScript.js"></script>
 </body>
 </html>
