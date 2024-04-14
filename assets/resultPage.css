@@ -83,12 +83,7 @@ div.incorrect-answers > p:nth-child(3){
     padding-left: 33px;
 }
 
-.chart-container {
-    /* Grafico a torta */
-    flex: 2;
-    background-color: #ccc;
-    height: 300px;
-}
+
 
 .rate-btn {
     width: 230px;
@@ -108,8 +103,5 @@ div.incorrect-answers > p:nth-child(3){
 }
 
 .rate-btn:hover {
-    background-color: #1c60a8;
+    background-color: #00ffff;
 }
-
-
-  
