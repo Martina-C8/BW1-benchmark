@@ -223,13 +223,13 @@ function aggiornaQuiz(question){
   }
   // resetto il timer e lo mostro
   remainingTimePath.classList.remove("addTransition")
-  console.log("rimosso addTransition")
+  // console.log("rimosso addTransition")
   timeLeft = startTime
   passedTime = 0
-  console.log("ripristinato timeleft e passedtime")
+  // console.log("ripristinato timeleft e passedtime")
   showTimer()
   remainingTimePath.classList.add("addTransition")
-  console.log("ripristinato addTransition")
+  // console.log("ripristinato addTransition")
 }
 
 
