@@ -24,3 +24,7 @@ var pieChart = new Chart(ctx, {
     data: data,
     options: options
 });
+
+function goToLastPage () {
+    location.replace("lastPage.html")
+}
