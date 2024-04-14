@@ -36,12 +36,11 @@ body, html {
     fill:  transparent;
     stroke-width: 10;
     stroke-linecap: round;
-    transition: 1s linear all;
 }
-/* Provare ad attribuire questa classe quando voglio che ci sia l'animazione, e toglierla quando no */
-/* #timeRemaining .addTransition{
-    transition: 1s linear all;
-} */
+
+.addTransition{
+    transition: 1s linear all !important;
+}
 
 
 #timer {

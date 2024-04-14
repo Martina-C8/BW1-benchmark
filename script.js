@@ -124,15 +124,15 @@ let numberOfCorrectAnswers = 0
 let numberOfWrongAnswers = 0
 let numberOfSkippedAnswers = 0
 // tempo massimo per rispondere alle domande
-const startTime = 5
+const startTime = 15
 // tempo trascorso dall'avvio della domanda
 let passedTime = 0
 // variabile per mostrare il tempo rimanente
 let timeLeft = startTime
 // contenitore del path
-let remainginTimePath = document.getElementById("timeRemaining")
+let remainingTimePath = document.getElementById("timeRemaining")
 // lunghezza totale del path
-let remainginTimePathLength = remainginTimePath.getTotalLength().toFixed(0)
+let remainingTimePathLength = remainingTimePath.getTotalLength().toFixed(0)
 // contenitore in cui mettere il tempo trascorso in secondi
 let timerContainer = document.getElementById("timer")
 
@@ -222,9 +222,14 @@ function aggiornaQuiz(question){
     buttonsContainer.appendChild(b)
   }
   // resetto il timer e lo mostro
+  remainingTimePath.classList.remove("addTransition")
+  console.log("rimosso addTransition")
   timeLeft = startTime
   passedTime = 0
+  console.log("ripristinato timeleft e passedtime")
   showTimer()
+  remainingTimePath.classList.add("addTransition")
+  console.log("ripristinato addTransition")
 }
 
 
@@ -232,7 +237,7 @@ function aggiornaQuiz(question){
 function showTimer(){
   // inserisco il valore attuale del timer nel suo contenitore
   timerContainer.innerText = timeLeft
-  remainginTimePath.setAttribute("stroke-dasharray", setPathDashArray())
+  remainingTimePath.setAttribute("stroke-dasharray", setPathDashArray())
 }
 
 
@@ -255,7 +260,6 @@ function updateTimer(){
   else{
     passedTime += 1
     timeLeft = startTime - passedTime
-    
     showTimer()
   }
 }
@@ -270,9 +274,9 @@ function setPathDashArray(){
   timePercentage = timePercentage - (1/startTime) * (1-timePercentage)
   // calcolo quanto deve essere lungo l'actual path per rappresentare il tempo già trascorso
   // nel caso in cui vada sotto zero, lo riporto a zero per non far ririempire tutto il dash.
-  let actualDash = (timePercentage * remainginTimePathLength).toFixed(0) < 0 ? 0 : (timePercentage * remainginTimePathLength).toFixed(0)
+  let actualDash = (timePercentage * remainingTimePathLength).toFixed(0) < 0 ? 0 : (timePercentage * remainingTimePathLength).toFixed(0)
   // compongo e restituisco la stringa
-  return sdaString = `${actualDash} ${remainginTimePathLength}`
+  return sdaString = `${actualDash} ${remainingTimePathLength}`
 }
 
 // avvio il quiz con la prima domanda
