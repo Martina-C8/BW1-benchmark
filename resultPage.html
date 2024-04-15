@@ -19,21 +19,21 @@
         <div class="results-container">
             <div class="correct-answers">
                 <p>Correct</p>
-                <p>66.7%</p>
-                <p>4/6 questions</p>
+                <p id="correctPercentage"></p>
+                <p id="correctNumbers">4/6 questions</p>
             </div>
             <!-- Grafico a torta -->
-                <canvas id="pie-chart"></canvas>            
+            <canvas id="pie-chart"></canvas>            
             <div class="incorrect-answers">
                 <p>Wrong</p>
-                <p>33.3%</p>
-                <p>2/6 questions</p>
+                <p id="wrongPercentage"></p>
+                <p id="wrongNumbers">2/6 questions</p>
             </div>
         </div>
         <button onclick="goToLastPage()" class="rate-btn">RATE US</button>
     </div>
-    <script src="/resultPageScript.js"></script>
+
 </main>
-<script src="/resultPageScript.js"></script>
+<script defer src="/resultPageScript.js"></script>
 </body>
 </html>

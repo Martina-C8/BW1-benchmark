@@ -124,7 +124,7 @@ let numberOfCorrectAnswers = 0
 let numberOfWrongAnswers = 0
 let numberOfSkippedAnswers = 0
 // tempo massimo per rispondere alle domande
-const startTime = 5
+const startTime = 15
 // tempo trascorso dall'avvio della domanda
 let passedTime = 0
 // variabile per mostrare il tempo rimanente
